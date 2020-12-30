@@ -41,7 +41,10 @@ async def admission_percent_calculator(message):
       match_school = school
       break
   
-  match_rate = float(format(float("0." + match_school[1][0:2]),'.2f'))
+  if len(match_school[1]) == 3:
+    match_rate = float(format(float("0." + match_school[1][0:2]),'.2f'))
+  else:
+    match_rate = float(format(float("0.0" + match_school[1][0:1]),'.2f'))
   match_ACT = (float(match_school[2][0:2]) + int(match_school[2][-2:])) / 2
   match_SAT = float((int(match_school[3][0:3]) + int(match_school[3][-3:])) / 2 + (int(match_school[4][0:3]) + int(match_school[4][-3:])) / 2)
 
@@ -127,8 +130,8 @@ async def on_message(message):
 
   if message.content == "$ca":
     await message.channel.send("To calculate the acceptance probability of a school, type: '$ca admission, 'the school you want to check', 'gpa', 'sat', 'act''")
-    await message.channel.send("To find the school that is the best fit for you, type: '$ca bestfit, 'state you want to be in', 'intended major', 'gpa', 'sat', 'act''")
-    #await message.channel.send("To see a list of schools to choose from, type $ca list")
+    # await message.channel.send("To find the school that is the best fit for you, type: '$ca bestfit, 'state you want to be in', 'intended major', 'gpa', 'sat', 'act''")
+    await message.channel.send("To see a list of schools to choose from, type $ca list")
     await message.channel.send("If there are entries you wish to leave blank, enter N/A for that space.")
     await message.channel.send("Made by Josh Cunningham")
 
